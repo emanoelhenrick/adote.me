@@ -6,7 +6,7 @@ Backend inteiramente feito em Python com auxilio da biblioteca externa Flask que
 Para rodar o projeto, além do Python, é necessário instalar as dependências. Para esse exemplo, vamos utilizar o gerenciador `pip`, se ainda não o tem instalado, pode-se instalar através do próprio Python:
 
 ```bash
-python 
+py -3 -m ensurepip
 ```
 
 Com o  `pip` instalado, podemos instalar as dependências. Na pasta root do projeto rodamos o comando:
