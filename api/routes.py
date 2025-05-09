@@ -1,8 +1,9 @@
-from flask import Blueprint, jsonify
+from flask import Blueprint
+from api.controllers import adopters, animals, shelters, volunteers
 
 api = Blueprint('api', __name__, url_prefix='/api')
 
-@api.route('/hello')
-def hello():
-    data = {"mensagem": "aquele que deixou a cesar school"}
-    return jsonify(data)
+api.register_blueprint(adopters.controller)
+api.register_blueprint(animals.controller)
+api.register_blueprint(shelters.controller)
+api.register_blueprint(volunteers.controller)
