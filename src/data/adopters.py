@@ -8,6 +8,9 @@ def create(new_adopter):
 def update(updated_adopter):
     print("altera uma entidade")
 
+def readAll():
+    print("lê todas as entidade")
+
 def readById(adopter_id):
     print("lê uma entidade")
 
