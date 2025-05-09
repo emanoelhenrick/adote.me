@@ -3,7 +3,7 @@
 Projeto feito em grupo para a disciplina de Fundamentos da Programação no curso de Análise e Desenvolvimento de Sistemas da CESAR School.
 Backend inteiramente feito em Python com auxilio da biblioteca externa Flask que facilita a implementação de uma Rest API.
 
-Para rodar o projeto, além do Python, é necessário instalar as dependências. Para esse exemplo, vamos utilizar o gerenciador `pip`, se ainda não o tem instalado, pode-se instalar através do próprio Python:
+Para rodar o projeto, além do Python, é necessário instalar as dependências. Para esse exemplo, vamos utilizar o gerenciador `pip` que já vem pré-instalado com o Python mas, se não o tiver, pode-se instalar através do próprio Python:
 
 ```bash
 py -3 -m ensurepip
