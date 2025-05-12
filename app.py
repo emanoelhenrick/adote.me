@@ -3,6 +3,8 @@ from api.routes import api
 from flask_cors import CORS
 import os
 
+print(os.path.join(os.path.dirname(__file__), "src/db"))
+
 PORT = 5000
 
 app = Flask(__name__, static_folder="dist", static_url_path="/dist")

@@ -1,33 +1,33 @@
-from flask import Blueprint, jsonify
+from flask import Blueprint, request
 from src.data import shelters
 
 controller = Blueprint('shelters', __name__, url_prefix='/shelters')
 
 @controller.post('/')
 def createNewShelter():
-  shelters.create({ "name": "casa de mae joana" })
-  return jsonify({ "message": "cria uma catraia"})
+  newShelter = request.get_json()
+  if not newShelter:
+    return { "error": "no shelter data provided" }, 400
+  savedShelter = shelters.create(newShelter)
+  return savedShelter, 201
 
 @controller.get('/')
 def fetchAllShelters():
-  shelters.readAll()
-  return jsonify({ "message": "cuida catraias"})
+  all_shelters = shelters.readAll()
+  return all_shelters, 200
 
 @controller.get('/<id>')
 def getShelterById(id):
-  shelters.readById(id)
-  return jsonify({ 
-    "message": "cuida catraia no singular",
-    "id": id
-  })
+  shelter = shelters.readById(id)
+  return shelter, 200
 
 @controller.put('/')
 def updateShelter():
-  shelters.update({ "name": "casa nao mais de mae joana" })
-  return jsonify({ "message": "catraia agr é malabares"})
+  updated_shelter = shelters.update({ "name": "casa nao mais de mae joana" })
+  return updated_shelter, 200
 
 @controller.delete('/<id>')
 def deleteShelter(id):
   shelters.delete(id)
-  return jsonify({ "message": "catraia agr é malabares"})
+  return 'shelter deleted', 200
 
