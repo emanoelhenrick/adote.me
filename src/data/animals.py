@@ -11,8 +11,17 @@ def create(animal):
 
     if not os.path.exists(ANIMAL_PATH):
         with open(ANIMAL_PATH, 'w') as file:
-            json.dump([ANIMAL_PATH], file, indent=4)
-    return animal
+            json.dump([animal], file, indent=4)
+        return animal
+
+    with open(ANIMAL_PATH, 'r') as file:
+        animal_json = json.load(file)
+        animal_json.append(animal)
+
+    with open(ANIMAL_PATH, 'w') as file:
+        json.dump(animal_json, file, indent=4)
+
+    return animal 
 
 
 def update(updated_animal):
