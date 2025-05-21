@@ -1,9 +1,19 @@
+import os
+import json
 from uuid import uuid4
+from src.data.utils import getJsonPath 
+
+ANIMAL_PATH = getJsonPath('animal')
 
 def create(animal):
     new_uuid = uuid4().__str__()
     animal['id'] = new_uuid
+
+    if not os.path.exists(ANIMAL_PATH):
+        with open(ANIMAL_PATH, 'w') as file:
+            json.dump([ANIMAL_PATH], file, indent=4)
     return animal
+
 
 def update(updated_animal):
     print("altera uma entidade")
