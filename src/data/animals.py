@@ -25,16 +25,57 @@ def create(animal):
 
 
 def update(updated_animal):
-    print("altera uma entidade")
+    if not os.path.exists(ANIMAL_PATH):
+        return None
+    
+    with open(ANIMAL_PATH, 'r') as file:
+        animal_json = json.load(file)
+
+        for animal in animal_json:
+             if animal['id'] == updated_animal['id']:
+                animal.update(updated_animal)
+                break
+        with open(ANIMAL_PATH, 'w') as file:
+          json.dump(animal_json, file, indent=4)
+
+    return updated_animal
 
 def readById(animal_id):
-    print("lê uma entidade")
+     if not os.path.exists(ANIMAL_PATH):
+        return None
+
+     with open(ANIMAL_PATH, 'r') as file:
+        animal_json = json.load(file)
+        for animal in animal_json:
+            if animal['id'] == animal_id:
+                return animal
+     return None
 
 def readAll():
-    print("lê todas as entidades")
+    if not os.path.exists(ANIMAL_PATH):
+        return None
 
+    with open(ANIMAL_PATH, 'r') as file:
+        animal_json = json.load(file)
+        return animal_json
+    
 def readAllByShelterId(shelter_id):
+
     print("lê todas as entidades relacionadas a um abrigo")
 
 def delete(animal_id):
-    print("remove uma entidade")
+    if not os.path.exists(ANIMAL_PATH):
+        return None
+    
+    with open(ANIMAL_PATH, 'r') as file:
+        animal_json = json.load(file)
+    
+        for animal in animal_json:
+            if animal["id"] == animal_id:
+                animal_json.remove(animal)
+                break
+            
+        with open(ANIMAL_PATH, 'w') as file:
+          json.dump(animal_json, file, indent=4)
+
+    return None
