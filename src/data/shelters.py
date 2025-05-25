@@ -3,9 +3,7 @@ from src.data.utils import getJsonPath
 import os
 import json
 
-
 SHELTER_PATH = getJsonPath('shelter')
-
 
 def create(new_shelter):
     new_uuid = uuid4().__str__()
