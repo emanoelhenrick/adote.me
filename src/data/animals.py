@@ -60,8 +60,18 @@ def readAll():
         return animal_json
     
 def readAllByShelterId(shelter_id):
+    if not os.path.exists(ANIMAL_PATH):
+        return None
 
-    print("lê todas as entidades relacionadas a um abrigo")
+    with open(ANIMAL_PATH, 'r') as file:
+        animals = []
+        animal_json = json.load(file)
+        for animal in animal_json:
+            if animal['shelter_id'] == shelter_id:
+                animals.append(animal)
+        if len(animals) > 0:
+            return animals
+    return None
 
 def delete(animal_id):
     if not os.path.exists(ANIMAL_PATH):
