@@ -1,6 +1,6 @@
 from flask import Blueprint, request
-import src.repositories.sheltersRepository as sheltersRepository
-import src.services.sheltersServices as sheltersServices
+from src.repositories import sheltersRepository
+from src.services import sheltersServices
 
 controller = Blueprint('shelters', __name__, url_prefix='/shelters')
 

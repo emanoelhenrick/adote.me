@@ -1,7 +1,7 @@
-import src.repositories.animalsRepository as animalsRepository
-import src.repositories.sheltersRepository as sheltersRepository
-import src.repositories.volunteersRepository as volunteersRepository
-import src.repositories.adoptersRepository as adoptersRepository
+from src.repositories import animalsRepository
+from src.repositories import sheltersRepository
+from src.repositories import volunteersRepository
+from src.repositories import adoptersRepository
 
 def acceptAdoptionRequest(animal_id, adopter_id):
     # altera a propriedade 'adopted' do animal para True
