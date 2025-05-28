@@ -1,26 +1,27 @@
 from flask import Blueprint, jsonify, request
-from src.data import adopters
+from repositories import adoptersRepository
+import src.services.adoptersServices as adoptersServices
 
 controller = Blueprint('adopters', __name__, url_prefix='/adopters')
 
 @controller.post('/')
 def createNewAdopter():
   newAdopter = request.get_json()
-
   if not newAdopter:
     return { "error": "no adopter data provided" }, 400
-  
-  savedAdopter = adopters.create(newAdopter)
-  return savedAdopter, 201
+  savedAdopter = adoptersRepository.create(newAdopter)
+  if not savedAdopter:
+    return { "error": "adopter already exists" }, 400
+  return '', 201
 
 @controller.get('/')
 def fetchAllAdopters():
-  allAdopters = adopters.readAll()
+  allAdopters = adoptersRepository.readAll()
   return jsonify(allAdopters), 200
 
 @controller.get('/<id>')
 def getAdopterById(id):
-  adopter = adopters.readById(id)
+  adopter = adoptersRepository.readById(id)
   if not adopter:
     return { "error": "adopter not found" }, 404
   return adopter, 200
@@ -30,10 +31,20 @@ def updateAdopter():
   updated_adopter = request.get_json()
   if not updated_adopter:
     return { "error": "no adopter data provided" }, 400
-  savedAdopter = adopters.update(updated_adopter)
+  savedAdopter = adoptersRepository.update(updated_adopter)
   return jsonify(savedAdopter), 200
 
 @controller.delete('/<id>')
 def deleteAdopter(id):
-  adopters.delete(id)
+  adoptersRepository.delete(id)
   return '', 200
+
+@controller.get('/pending-requests/<adopter_id>')
+def getPendingAdoptionRequests(adopter_id):
+  pending_requests = adoptersServices.getPendingAdoptionRequests(adopter_id)
+  return jsonify(pending_requests), 200
+
+@controller.get('/adopted-animals/<adopter_id>')
+def fetchAdoptedAnimals(adopter_id):
+  adopted_animals = adoptersServices.fetchAdoptedAnimals(adopter_id)
+  return jsonify(adopted_animals), 200

@@ -1,5 +1,5 @@
 from uuid import uuid4
-from src.data.utils import getJsonPath
+from src.repositories.utils import getJsonPath
 import os
 import json
 
@@ -81,3 +81,4 @@ def delete(shelter_id):
           json.dump(shelter_json, file, indent=4)
 
     return None
+
