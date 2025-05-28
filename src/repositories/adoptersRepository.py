@@ -1,7 +1,7 @@
 import os
 import json
 from uuid import uuid4
-from src.data.utils import getJsonPath
+from src.repositories.utils import getJsonPath
 
 ADOPTERS_PATH = getJsonPath('adopters')
 

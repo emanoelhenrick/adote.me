@@ -1,33 +1,72 @@
-from flask import Blueprint, jsonify
-from src.data import animals
+from flask import Blueprint, jsonify, request
+import src.repositories.animalsRepository as animalsRepository
+import src.services.animalsServices as animalsServices
 
 controller = Blueprint('animals', __name__, url_prefix='/animals')
 
 @controller.post('/')
 def createNewAnimal():
-  animals.create({ "name": "manel" })
-  return jsonify({ "message": "cria uma catraia"})
+  new_animal = request.get_json()
+  if not new_animal:
+    return jsonify({ "message": "Não foi possível adicionar um novo animal" }), 400
+  animalsRepository.create(new_animal)
+  return '', 201
 
 @controller.get('/')
 def fetchAllAnimals():
-  animals.readAll()
-  return jsonify({ "message": "cuida catraias"})
+  animals = animalsRepository.readAll()
+  return animals
 
 @controller.get('/<id>')
 def getAnimalById(id):
-  animals.readById(id)
-  return jsonify({ 
-    "message": "cuida catraia no singular",
-    "id": id
-  })
+  animal = animalsRepository.readById(id)
+  return animal
 
 @controller.put('/')
 def updateAnimal():
-  animals.update({ "name": "click" })
-  return jsonify({ "message": "catraia agr é malabares"})
+  updated_animal = request.get_json()
+  if not updated_animal:
+    return jsonify({ "message": "Animal não foi enviado" }), 400
+  updatedAnimal = animalsRepository.update(updated_animal)
+  if not updatedAnimal:
+    return jsonify({ "message": "Animal não encontrado" }), 404
+  return jsonify({ "message": "Animal atualizado com sucesso" }), 200
 
 @controller.delete('/<id>')
 def deleteAnimal(id):
-  animals.delete(id)
-  return jsonify({ "message": "catraia agr é malabares"})
+  animalsRepository.delete(id)
+  return '', 200
 
+#------------------------------------------------#
+
+# request_data example:
+# {
+#   'adopter_id': '12345',
+#   'animal_id': '67890',
+# }
+@controller.post('/adoption')
+def requestAdoption():
+  request_data = request.get_json()
+  if not request_data:
+    return jsonify({ "error": "no request data provided" }), 400
+  isSuccess = animalsServices.requestAdoption(request_data)
+  if not isSuccess:
+    return jsonify({ "error": "adoption request failed" }), 500
+  return jsonify({ "message": "adoption request successful" }), 200
+
+@controller.delete('/adoption')
+def cancelAdoption():
+  request_data = request.get_json()
+  if not request_data:
+    return jsonify({ "error": "no request data provided" }), 400
+  isSuccess = animalsServices.cancelAdoption(request_data)
+  if not isSuccess:
+    return jsonify({ "error": "cancellation of adoption request failed" }), 500
+  return jsonify({ "message": "cancellation of adoption request successful" }), 200
+
+@controller.get('/available')
+def fetchAllAvailableAnimals():
+  available_animals = animalsServices.fetchAllAvailableAnimals()
+  if not available_animals:
+    return jsonify({ "message": "no available animals found" }), 404
+  return jsonify(available_animals), 200
