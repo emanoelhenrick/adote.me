@@ -1,5 +1,5 @@
-import src.repositories.volunteersRepository as volunteersRepository
-import src.repositories.sheltersRepository as sheltersRepository
+from src.repositories import volunteersRepository
+from src.repositories import sheltersRepository
 
 def fetchAvailableShelters():
     # pega todos os abrigos e filtra os que estão disponíveis para voluntários

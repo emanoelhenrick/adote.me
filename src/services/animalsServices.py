@@ -1,4 +1,4 @@
-import src.repositories.animalsRepository as animalsRepository
+from src.repositories import animalsRepository
 
 def requestAdoption(request_data):
     animal = animalsRepository.readById(request_data.get('animal_id'))

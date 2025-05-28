@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, request
-import src.repositories.animalsRepository as animalsRepository
-import src.services.animalsServices as animalsServices
+from src.repositories import animalsRepository
+from src.services import animalsServices
 
 controller = Blueprint('animals', __name__, url_prefix='/animals')
 

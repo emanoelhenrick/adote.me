@@ -1,4 +1,4 @@
-import src.repositories.adoptersRepository as adoptersRepository
+from src.repositories import adoptersRepository
 
 def getPendingAdoptionRequests(adopter_id):
     # pega os animais que o adotante solicitou para adoção
