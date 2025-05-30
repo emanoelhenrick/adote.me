@@ -13,7 +13,7 @@ def acceptAdoptionRequest(animal_id, adopter_id):
 def cancelAdoptionRequest(animal_id, adopter_id):
     # remove o id do adotante da lista de 'adoption_requests' do animal
     # remove o id do animal da lista de 'adoption_requests' do adotante
-    # deve retornar True se a operação for bem-sucedida, False caso contrário
+    # deve retornar True se a operação for bem-sucedida, False caso contrário teste
     pass
 
 def updateAcceptingVolunteers(shelter_id):
