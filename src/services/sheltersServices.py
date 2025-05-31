@@ -44,3 +44,11 @@ def updateAcceptingVolunteers(shelter_id):
     # deve retornar True se a operação for bem-sucedida, False caso contrário
     pass
 
+def fetchAllVolunteers():
+    volunteers = volunteersRepository.readAll()
+    accepted_volunteers = []
+
+    for volunteer in volunteers:
+        if volunteer.get('accepting_volunteers') == True:
+            accepted_volunteers.append(volunteer)
+    return accepted_volunteers
