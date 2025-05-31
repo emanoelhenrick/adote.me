@@ -10,11 +10,23 @@ def acceptAdoptionRequest(animal_id, adopter_id):
     # deve retornar True se a operação for bem-sucedida, False caso contrário
     pass
 
+
 def cancelAdoptionRequest(animal_id, adopter_id):
-    # remove o id do adotante da lista de 'adoption_requests' do animal
-    # remove o id do animal da lista de 'adoption_requests' do adotante
-    # deve retornar True se a operação for bem-sucedida, False caso contrário teste
-    pass
+    animal = animalsRepository.readById(animal_id)
+    newRequestsList = []
+    for requestAdopterId in animal['adoption_requests']:
+        if requestAdopterId != adopter_id:
+            newRequestsList.append(requestAdopterId)
+    animal['adoption_requests'] = newRequestsList
+
+    adopter = adoptersRepository.readById(adopter_id)
+    newRequestsList2 = []
+    for requestAnimalId in adopter['adoption_requests']:
+        if requestAnimalId != animal_id:
+            newRequestsList2.append(requestAnimalId)
+    adopter['adoption_requests'] = newRequestsList2
+
+    return True
 
 def updateAcceptingVolunteers(shelter_id):
     # atualiza a propriedade 'accepting_volunteers' do abrigo
