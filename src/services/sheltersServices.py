@@ -4,11 +4,22 @@ from src.repositories import volunteersRepository
 from src.repositories import adoptersRepository
 
 def acceptAdoptionRequest(animal_id, adopter_id):
+    animal = animalsRepository.readById(animal_id)
+    adopter = adoptersRepository.readById(adopter_id)
+
+    if adopter_id in animal['adoption_requests']:
+        animal['adopted'] = True
+        animal['adoption_requests'].remove(adopter_id)
+        adopter['adopted_animals'].append(animal_id)
+        animalsRepository.update(animal)
+        adoptersRepository.update(adopter)
+        return True
+    return False
+
     # altera a propriedade 'adopted' do animal para True
     # remove o id do adotante da lista de 'adoption_requests' do animal
     # adiciona o id do animal na lista de 'adopted_animals' do adotante
     # deve retornar True se a operação for bem-sucedida, False caso contrário
-    pass
 
 def cancelAdoptionRequest(animal_id, adopter_id):
     # remove o id do adotante da lista de 'adoption_requests' do animal
