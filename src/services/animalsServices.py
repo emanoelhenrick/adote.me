@@ -15,7 +15,14 @@ def cancelAdoption(request_data):
     return False
 
 def fetchAllAvailableAnimals():
-    # pega todos os animais e filtra os que estão disponíveis para adoção
-    # deve retornar uma lista com os animais que estiverem com a propriedade 'adopted' = False
-    pass
+    animal = animalsRepository.readAll()
+    available = []
 
+    if animal is None:
+        return []
+
+    for animal in animalsRepository:
+        if animal.get('adopted') == False:
+            available.append(animal)
+
+    return available
