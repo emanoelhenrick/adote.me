@@ -4,7 +4,7 @@ from src.repositories import volunteersRepository
 from src.repositories import adoptersRepository
 
 def acceptAdoptionRequest(animal_id, adopter_id):
-    # altera a propriedade 'adopted' do animal para True
+    # altera a propriedade 'adopted' do animal para True - ok
     # remove o id do adotante da lista de 'adoption_requests' do animal
     # adiciona o id do animal na lista de 'adopted_animals' do adotante
     # deve retornar True se a operação for bem-sucedida, False caso contrário
@@ -33,4 +33,27 @@ def updateAcceptingVolunteers(shelter_id):
     # deve receber um id de abrigo e inverter o valor da propriedade
     # deve retornar True se a operação for bem-sucedida, False caso contrário
     pass
+
+def acceptingVolunteers(shelter_id, volunteer_id):
+    shelter = sheltersRepository.readById(shelter_id)
+    volunteer = volunteersRepository.readById(volunteer_id)
+    if volunteer_id in shelter['volunteer_requests']:
+        volunteer['accepting_volunteers'] = True
+        shelter['volunteers'].append(volunteer_id)
+        shelter['volunteer_requests'].remove(volunteer_id)
+        sheltersRepository.update(shelter)
+        volunteersRepository.update(volunteer)
+        return True
+    return False
+
+def refusingVolunteers(shelter_id, volunteer_id):
+    shelter = sheltersRepository.readById(shelter_id)
+    volunteer = volunteersRepository.readById(volunteer_id)
+    if volunteer_id in shelter['volunteer_requests']:
+        volunteer['accepting_volunteers'] = False
+        shelter['volunteer_requests'].remove(volunteer_id)
+        sheltersRepository.update(shelter)
+        volunteersRepository.update(volunteer)
+        return True
+    return False
 
