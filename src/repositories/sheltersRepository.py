@@ -15,7 +15,7 @@ def create(new_shelter):
         return new_shelter
 
     with open(SHELTER_PATH, 'r') as file:
-        shelter_json = json.load(file)
+        shelter_json = json.load(file) 
         shelter_json.append(new_shelter)
 
     with open(SHELTER_PATH, 'w') as file:
