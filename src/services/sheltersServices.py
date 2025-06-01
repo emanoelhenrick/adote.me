@@ -4,18 +4,25 @@ from src.repositories import volunteersRepository
 from src.repositories import adoptersRepository
 
 def acceptAdoptionRequest(animal_id, adopter_id):
-    animal = animalsRepository.readById(animal_id)
-    adopter = adoptersRepository.readById(adopter_id)
+    animal= animalsRepository.readById(animal_id)
+    adopter= adoptersRepository.readById(adopter_id)
+    if animal is None or adopter is None:
+        return False
+    
+    animal['adopted']= True
 
     if adopter_id in animal['adoption_requests']:
-        animal['adopted'] = True
         animal['adoption_requests'].remove(adopter_id)
+    
+    if'adopted_animals' not in adopter:
+        adopter['adopted_animals']=[]
+
         adopter['adopted_animals'].append(animal_id)
+
         animalsRepository.update(animal)
         adoptersRepository.update(adopter)
-        return True
-    return False
 
+        return True
 
 def cancelAdoptionRequest(animal_id, adopter_id):
     animal = animalsRepository.readById(animal_id)
@@ -30,8 +37,28 @@ def cancelAdoptionRequest(animal_id, adopter_id):
     for requestAnimalId in adopter['adoption_requests']:
         if requestAnimalId !=animal_id:
             newRequestList2.append(requestAnimalId)
-    adopter['adoption_requests']
+    
+    adopter['adoption_requests'] = newRequestList2
+    animalsRepository.update(animal)
+    adoptersRepository.update(adopter)
+           
+
    
+def updateAcceptingVolunteers(shelter_id):
+    shelter= sheltersRepository.readById(shelter_id)
+    if shelter in None:
+        return False
+    
+    if 'accepting_volunteers' in shelter:
+        if shelter['accepting_volunteers']== True:
+            shelter['accepting_volunteers'] = False
+        
+        else:
+            shelter['accepting_volunteers']= True
+    else:
+        return True
+    sheltersRepository.update(shelter)
+
 
 def acceptingVolunteers(shelter_id, volunteer_id):
     shelter = sheltersRepository.readById(shelter_id)
@@ -54,14 +81,4 @@ def refusingVolunteers(shelter_id, volunteer_id):
         sheltersRepository.update(shelter)
         volunteersRepository.update(volunteer)
         return True
-    return False
-
-def fetchAllVolunteers():
-    volunteers = volunteersRepository.readAll()
-    accepted_volunteers = []
-
-    for volunteer in volunteers:
-        if volunteer.get('accepting_volunteers') == True:
-            accepted_volunteers.append(volunteer)
-
-    return accepted_volunteers
+    return False 
