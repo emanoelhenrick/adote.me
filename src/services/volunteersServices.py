@@ -4,35 +4,80 @@ from src.repositories import animalsRepository
 from src.repositories import adoptersRepository
 
 def fetchAvailableShelters():
-    # pega todos os abrigos e filtra os que estão disponíveis para voluntários
-    # deve retornar uma lista com os abrigos que estiverem com a propriedade 'accepting_volunteers' = True
-    pass
+    all_shelters = sheltersRepository.readAll()
+    available_shelters = []
+
+    if all_shelters:
+        for shelter in all_shelters:
+            if shelter['accepting_volunteers'] is True:
+                available_shelters.append(shelter)
+    
+    return available_shelters
 
 
 def fetchActiveShelters(volunteer_id):
-    # retorna os abrigos que o voluntário está ativo
-    # devolve os abrigos que estão na propriedade 'active_volunteering' do voluntario
-    pass
+    volunteer = volunteersRepository.readById(volunteer_id)
+    active_shelters_list = []
+
+    if volunteer:
+        for shelter_id_active in volunteer['active_volunteering']:
+            shelter = sheltersRepository.readById(shelter_id_active)
+            if shelter:
+                active_shelters_list.append(shelter)
+        
+        return active_shelters_list
 
 
 def fetchPendingRequests(volunteer_id):
-    # retorna os abrigos que o voluntário solicitou para ser voluntário
-    # devolve os abrigos que estão na propriedade 'applied_shelters' do voluntário
-    pass
+    volunteer = volunteersRepository.readById(volunteer_id)
+    pending_shelters_list = []
+
+    if volunteer:
+        for shelter_id_pending in volunteer['applied_shelters']:
+            shelter = sheltersRepository.readById(shelter_id_pending)
+            if shelter:
+                pending_shelters_list.append(shelter)
+    
+    return pending_shelters_list
 
 
 def requestVolunteer(shelter_id, volunteer_id):
-    # adiciona o id do voluntário na lista de 'volunteer_requests' do abrigo
-    # adiciona o id do abrigo na lista de 'applied_shelters' do voluntário
-    # deve retornar True se a operação for bem-sucedida, False caso contrário
-    pass
+    shelter = sheltersRepository.readById(shelter_id)
+    volunteer = volunteersRepository.readById(volunteer_id)
+
+    if shelter and volunteer:
+        shelter['volunteer_requests'].append(volunteer_id)
+        volunteer['applied_shelters'].append(shelter_id)
+
+        sheltersRepository.update(shelter)
+        volunteersRepository.update(volunteer)
+
+        return True
+    return False
 
 
 def cancelVolunteerRequest(shelter_id, volunteer_id):
-    # remove o id do voluntário na lista de 'volunteer_requests' do abrigo
-    # remove o id do abrigo na lista de 'applied_shelters' do voluntário
-    # deve retornar True se a operação for bem-sucedida, False caso contrário
-    pass
+    shelter = sheltersRepository.readById(shelter_id)
+    volunteer = volunteersRepository.readById(volunteer_id)
+    if not shelter or not volunteer:
+        return False
+
+    new_requests_list = []
+    for requests_volunteer_id in shelter['volunteer_requests']:
+        if requests_volunteer_id != volunteer_id:
+            new_requests_list.append(requests_volunteer_id)
+    shelter['volunteer_requests'] = new_requests_list
+
+    new_requests_list2 = []
+    for requests_shelter_id in volunteer['applied_shelters']:
+        if requests_shelter_id != shelter_id:
+            new_requests_list2.append(requests_shelter_id)
+    volunteer['applied_shelters'] = new_requests_list2
+
+    sheltersRepository.update(shelter)
+    volunteersRepository.update(volunteer)
+
+    return True
 
 
 def acceptVolunteerRequest(shelter_id, volunteer_id):
