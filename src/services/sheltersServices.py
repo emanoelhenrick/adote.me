@@ -82,3 +82,17 @@ def refusingVolunteers(shelter_id, volunteer_id):
         volunteersRepository.update(volunteer)
         return True
     return False 
+
+
+def fetchAllVolunteers():
+    volunteers = volunteersRepository.readAll()
+    accepted_volunteers = []
+
+    if volunteers is None:
+        return []
+    
+    for volunteer in volunteers:
+        if volunteer.get('accepting_volunteers') == True:
+            accepted_volunteers.append(volunteer)
+
+    return accepted_volunteers
