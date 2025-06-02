@@ -34,7 +34,7 @@ def fetchAdoptedAnimals(adopter_id):
     for animal_id in adopted_animals_id:
         animal = animalsRepository.readById(animal_id)
         if animal:
-            adopted_animals.apend(animal)
+            adopted_animals.append(animal)
     return adopted_animals
     
 
