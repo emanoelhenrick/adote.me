@@ -12,5 +12,17 @@
             "4f78ad1b-3044-4db8-ad7d-e3ba140e0770"
         ],
         "id": "4fcdbc6c-41f5-4d4a-aa97-59384c2ba930"
+    },
+    {
+        "name": "Amazon",
+        "email": "amazon@gmail.com",
+        "password": "amazon123",
+        "role": "shelter",
+        "confirmPassword": "amazon123",
+        "address": "Recife, PE",
+        "id": "3c94e3b0-7ee8-4207-95ca-e424e5bc7a6b",
+        "active_volunteers": [],
+        "volunteer_requests": [],
+        "accepting_volunteers": false
     }
 ]

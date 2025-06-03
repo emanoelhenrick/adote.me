@@ -13,16 +13,13 @@ def acceptAdoptionRequest(animal_id, adopter_id):
 
     if adopter_id in animal['adoption_requests']:
         animal['adoption_requests'].remove(adopter_id)
-    
-    if'adopted_animals' not in adopter:
-        adopter['adopted_animals']=[]
 
-        adopter['adopted_animals'].append(animal_id)
+    adopter['adopted_animals'].append(animal_id)
 
-        animalsRepository.update(animal)
-        adoptersRepository.update(adopter)
+    animalsRepository.update(animal)
+    adoptersRepository.update(adopter)
 
-        return True
+    return True
 
 def cancelAdoptionRequest(animal_id, adopter_id):
     animal = animalsRepository.readById(animal_id)

@@ -5,23 +5,9 @@
         "password": "fofoquitos123",
         "role": "adopter",
         "confirmPassword": "fofoquitos123",
-        "preferences": [
-            {
-                "value": "dog",
-                "label": "Dog"
-            },
-            {
-                "value": "calm",
-                "label": "Calm"
-            },
-            {
-                "value": "playful",
-                "label": "Playful"
-            }
-        ],
         "id": "19aed67a-a9fc-4e66-a326-9ea1bc178fbd",
         "adopted_animals": [
-            "b8b61f88-643a-4306-8e8e-c7dabf7b6456"
+            "42948715-ad1d-4c3e-af89-32bbf7a59151"
         ]
     }
 ]

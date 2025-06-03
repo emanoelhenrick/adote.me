@@ -1,30 +1,49 @@
 [
     {
-        "shelter": {
-            "id": "4fcdbc6c-41f5-4d4a-aa97-59384c2ba930",
-            "name": "Lar dos Fofoquitos",
-            "address": "Recife, PE"
-        },
-        "name": "clickdoid",
+        "name": "Rex",
         "age": "6",
         "sex": "m",
-        "adopted": true,
-        "description": "descricao legal",
-        "adoption_requests": [],
-        "id": "b8b61f88-643a-4306-8e8e-c7dabf7b6456"
-    },
-    {
+        "description": "Amig\u00e1vel e leal, este Pastor Alem\u00e3o encanta com sua do\u00e7ura e intelig\u00eancia. Sempre pronto para brincar ou proteger, \u00e9 um companheiro fiel que conquista todos com seu jeito carinhoso.",
+        "image_filename": "604490a4-bc36-43aa-bb9a-b2cd5fe08ab8.jpg",
+        "id": "e1649a92-cabb-4979-bee3-1b4cb221386d",
+        "adopted": false,
+        "adoption_requests": [
+            "19aed67a-a9fc-4e66-a326-9ea1bc178fbd"
+        ],
         "shelter": {
             "id": "4fcdbc6c-41f5-4d4a-aa97-59384c2ba930",
             "name": "Lar dos Fofoquitos",
             "address": "Recife, PE"
-        },
-        "name": "podle",
-        "age": "6",
+        }
+    },
+    {
+        "name": "Lola",
+        "age": "3",
         "sex": "f",
+        "description": "D\u00f3cil, alegre e afetuosa, a Golden Retriever \u00e9 a companheira perfeita. Sempre pronta para brincar e espalhar carinho, conquista todos com seu jeito gentil e olhar meigo.",
+        "image_filename": "638cf438-bee3-4257-bee8-c4c200cd643f.png",
+        "id": "7047a1e3-3873-4db8-9261-228ec672a00f",
         "adopted": false,
-        "description": "deded",
         "adoption_requests": [],
-        "id": "951116ab-8386-4789-84d6-658dd2acb434"
+        "shelter": {
+            "id": "4fcdbc6c-41f5-4d4a-aa97-59384c2ba930",
+            "name": "Lar dos Fofoquitos",
+            "address": "Recife, PE"
+        }
+    },
+    {
+        "name": "Click",
+        "age": "6",
+        "sex": "m",
+        "description": "Pequeno no tamanho, mas gigante na personalidade, o Pinscher Miniatura \u00e9 valente, energ\u00e9tico e cheio de atitude. Sempre alerta e apegado \u00e0 fam\u00edlia, \u00e9 um companheiro leal e animado.",
+        "image_filename": "6bee2dfc-fb81-4317-af6a-dddb20554a6b.jpg",
+        "id": "42948715-ad1d-4c3e-af89-32bbf7a59151",
+        "adopted": true,
+        "adoption_requests": [],
+        "shelter": {
+            "id": "4fcdbc6c-41f5-4d4a-aa97-59384c2ba930",
+            "name": "Lar dos Fofoquitos",
+            "address": "Recife, PE"
+        }
     }
 ]

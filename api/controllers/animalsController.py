@@ -1,16 +1,37 @@
 from flask import Blueprint, jsonify, request
 from src.repositories import animalsRepository
 from src.services import animalsServices
+import os
+import uuid
 
 controller = Blueprint('animals', __name__, url_prefix='/animals')
 
 @controller.post('/')
 def createNewAnimal():
-  new_animal = request.get_json()
-  if not new_animal:
-    return jsonify({ "message": "Não foi possível adicionar um novo animal" }), 400
-  animalsRepository.create(new_animal)
-  return '', 201
+  if request.content_type.startswith('multipart/form-data'):
+    new_animal_data = request.form.to_dict()
+    image = request.files.get('image')
+    if not new_animal_data or not image:
+      return jsonify({ "message": "Dados ou imagem não enviados" }), 400
+
+    ext = os.path.splitext(image.filename)[1]
+    unique_filename = f"{uuid.uuid4()}{ext}"
+
+    project_root = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
+    upload_folder = os.path.join(project_root, "dist", "images")
+    os.makedirs(upload_folder, exist_ok=True)
+    image_path = os.path.join(upload_folder, unique_filename)
+    image.save(image_path)
+
+    new_animal_data['image_filename'] = unique_filename
+    animalsRepository.create(new_animal_data)
+    return '', 201
+  else:
+    new_animal = request.get_json()
+    if not new_animal:
+      return jsonify({ "message": "Não foi possível adicionar um novo animal" }), 400
+    animalsRepository.create(new_animal)
+    return '', 201
 
 @controller.get('/')
 def fetchAllAnimals():
@@ -44,11 +65,6 @@ def deleteAnimal(id):
 
 #------------------------------------------------#
 
-# request_data example:
-# {
-#   'adopter_id': '12345',
-#   'animal_id': '67890',
-# }
 @controller.post('/adoption')
 def requestAdoption():
   request_data = request.get_json()

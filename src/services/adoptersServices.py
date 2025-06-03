@@ -21,20 +21,14 @@ def getPendingAdoptionRequests(adopter_id):
 
 
 def fetchAdoptedAnimals(adopter_id):
-
     adopter = adoptersRepository.readById(adopter_id)
     if not adopter:
         return None
     
-    adopted_animals_id = adopter.get('adopted_animals')
-    if not adopted_animals_id:
+    adopted_animals = adopter.get('adopted_animals', [])
+    if not adopted_animals:
         return []
     
-    adopted_animals = []
-    for animal_id in adopted_animals_id:
-        animal = animalsRepository.readById(animal_id)
-        if animal:
-            adopted_animals.append(animal)
     return adopted_animals
     
 

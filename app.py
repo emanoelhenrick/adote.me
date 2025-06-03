@@ -19,6 +19,10 @@ app.register_blueprint(api)
 def serve_assets(filename):
     return send_from_directory(os.path.join(app.static_folder, "assets"), filename)
 
+@app.route('/images/<path:filename>')
+def serve_images(filename):
+    return send_from_directory(os.path.join(app.static_folder, "images"), filename)
+
 @app.route('/', defaults={'path': ''})
 @app.route('/<path:path>')
 def serve_react(path):

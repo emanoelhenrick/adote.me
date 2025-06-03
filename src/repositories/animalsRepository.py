@@ -8,7 +8,22 @@ ANIMAL_PATH = getJsonPath('animal')
 def create(animal):
     new_uuid = uuid4().__str__()
     animal['id'] = new_uuid
+    animal['adopted'] = False
     animal["adoption_requests"] = []
+
+    shelter_id = animal["shelter_id"]
+    shelter_name = animal["shelter_name"]
+    shelter_address = animal["shelter_address"]
+
+    del animal["shelter_id"]
+    del animal["shelter_name"]
+    del animal["shelter_address"]
+    
+    animal["shelter"] = {
+        "id": shelter_id,
+        "name": shelter_name,
+        "address": shelter_address,
+    }
 
     if not os.path.exists(ANIMAL_PATH):
         with open(ANIMAL_PATH, 'w') as file:
