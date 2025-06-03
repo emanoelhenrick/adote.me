@@ -41,29 +41,37 @@ def deleteShelter(id):
   sheltersRepository.delete(id)
   return '', 200
 
-@controller.post('/adoption')
-def aceptAdoptionRequest():
+@controller.post('/accept-adoption')
+def acceptAdoptionRequest():
   data = request.get_json()
   if not data or 'animal_id' not in data or 'adopter_id' not in data:
     return { "error": "animal_id and adopter_id are required" }, 400
-  success = sheltersServices.aceptAdoptionRequest(data['animal_id'], data['adopter_id'])
+  success = sheltersServices.acceptAdoptionRequest(data['animal_id'], data['adopter_id'])
   if not success:
     return { "message": "failed to accept adoption request" }, 500
   return '', 200
 
-@controller.delete('/adoption')
+@controller.post('/reject-adoption')
 def cancelAdoptionRequest():
   data = request.get_json()
   if not data or 'animal_id' not in data or 'adopter_id' not in data:
     return { "error": "animal_id and adopter_id are required" }, 400
   success = sheltersServices.cancelAdoptionRequest(data['animal_id'], data['adopter_id'])
+  print(success)
   if not success:
     return { "message": "failed to cancel adoption request" }, 500
   return '', 200
 
-@controller.put('/accepting-volunteers/<shelter_id>')
+@controller.post('/accepting-volunteers/<shelter_id>')
 def updateAcceptingVolunteers(shelter_id):
-  success = sheltersServices.updateAcceptingVolunteers(shelter_id)
-  if not success:
-    return { "message": "failed to update accepting volunteers status" }, 500
-  return '', 200
+  isOpen = sheltersServices.updateAcceptingVolunteers(shelter_id)
+  if not isOpen:
+    return { "isOpen": False }, 200
+  return { "isOpen": True }, 200
+
+@controller.get('/adoption-requests/<shelter_id>')
+def fetchAllAdoptionRequests(shelter_id):
+  all_requests = sheltersServices.fetchAllAdoptionRequests(shelter_id)
+  if not all_requests:
+    return { "message": "no adoption requests found" }, 404
+  return all_requests, 200

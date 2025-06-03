@@ -8,8 +8,9 @@
         "name": "click",
         "age": "6",
         "sex": "m",
-        "adopted": false,
+        "adopted": true,
         "description": "descricao legal",
+        "adoption_requests": [],
         "id": "b8b61f88-643a-4306-8e8e-c7dabf7b6456"
     },
     {
@@ -23,6 +24,7 @@
         "sex": "f",
         "adopted": false,
         "description": "deded",
+        "adoption_requests": [],
         "id": "951116ab-8386-4789-84d6-658dd2acb434"
     },
     {
@@ -36,6 +38,7 @@
         "sex": "m",
         "adopted": false,
         "description": "fefef",
+        "adoption_requests": [],
         "id": "4a2cefb8-ab9c-4a90-8264-97ccb99f0fc9"
     }
 ]

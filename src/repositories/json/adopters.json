@@ -19,6 +19,9 @@
                 "label": "Playful"
             }
         ],
-        "id": "19aed67a-a9fc-4e66-a326-9ea1bc178fbd"
+        "id": "19aed67a-a9fc-4e66-a326-9ea1bc178fbd",
+        "adopted_animals": [
+            "b8b61f88-643a-4306-8e8e-c7dabf7b6456"
+        ]
     }
 ]

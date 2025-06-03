@@ -31,33 +31,22 @@ def cancelAdoptionRequest(animal_id, adopter_id):
         if requestAdopterId != adopter_id:
             newRequestsList.append(requestAdopterId)
     animal['adoption_requests'] = newRequestsList
-
-    adopter= adoptersRepository.readById(adopter_id)
-    newRequestList2= []
-    for requestAnimalId in adopter['adoption_requests']:
-        if requestAnimalId !=animal_id:
-            newRequestList2.append(requestAnimalId)
-    
-    adopter['adoption_requests'] = newRequestList2
     animalsRepository.update(animal)
-    adoptersRepository.update(adopter)
+    return True
            
 
-   
 def updateAcceptingVolunteers(shelter_id):
-    shelter= sheltersRepository.readById(shelter_id)
-    if shelter in None:
+    shelter = sheltersRepository.readById(shelter_id)
+    if shelter is None:
         return False
     
     if 'accepting_volunteers' in shelter:
-        if shelter['accepting_volunteers']== True:
+        if shelter['accepting_volunteers']:
             shelter['accepting_volunteers'] = False
-        
         else:
-            shelter['accepting_volunteers']= True
-    else:
-        return True
+            shelter['accepting_volunteers'] = True
     sheltersRepository.update(shelter)
+    return shelter['accepting_volunteers']
 
 
 def acceptingVolunteers(shelter_id, volunteer_id):
@@ -92,7 +81,24 @@ def fetchAllVolunteers():
         return []
     
     for volunteer in volunteers:
-        if volunteer.get('accepting_volunteers') == True:
+        if volunteer.get('accepting_volunteers'):
             accepted_volunteers.append(volunteer)
 
     return accepted_volunteers
+
+def fetchAllAdoptionRequests(shelter_id):
+    animals = animalsRepository.readAllByShelterId(shelter_id)
+    adoption_requests = []
+
+    if animals is None:
+        return []
+    
+    for animal in animals:
+        if animal.get('adoption_requests'):
+            for adopter_id in animal['adoption_requests']:
+                adoption_requests.append({
+                    'animal_id': animal['id'],
+                    'adopter_id': adopter_id
+                })
+
+    return adoption_requests

@@ -8,6 +8,9 @@ SHELTER_PATH = getJsonPath('shelter')
 def create(new_shelter):
     new_uuid = uuid4().__str__()
     new_shelter['id'] = new_uuid
+    new_shelter["active_volunteers"] = []
+    new_shelter["volunteer_requests"] = []
+    new_shelter["accepting_volunteers"] = False
 
     if not os.path.exists(SHELTER_PATH):
         with open(SHELTER_PATH, 'w') as file:

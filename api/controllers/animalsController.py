@@ -61,7 +61,7 @@ def requestAdoption():
     return jsonify({ "error": "adoption request failed" }), 500
   return jsonify({ "message": "adoption request successful" }), 200
 
-@controller.delete('/adoption')
+@controller.post('/cancel-adoption')
 def cancelAdoption():
   request_data = request.get_json()
   if not request_data:
