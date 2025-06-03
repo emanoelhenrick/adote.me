@@ -19,11 +19,8 @@ def fetchAllVolunteers():
 
 @controller.get('/<id>')
 def getVolunteerById(id):
-  volunteersRepository.readById(id)
-  return jsonify({ 
-    "message": "cuida catraia no singular",
-    "id": id
-  })
+  volunteer = volunteersRepository.readById(id)
+  return jsonify(volunteer)
 
 @controller.put('/')
 def updateVolunteer():
@@ -55,7 +52,7 @@ def requestVolunteer():
     return jsonify({ "message": "Erro ao solicitar voluntariado" }), 500
   return jsonify({ "message": "Solicitação de voluntariado enviada com sucesso" }), 201
 
-@controller.put('/accept-volunteer-request')
+@controller.post('/accept-volunteer-request')
 def acceptVolunteerRequest():
   data = request.get_json()
   if not data or 'shelter_id' not in data or 'volunteer_id' not in data:
@@ -65,7 +62,7 @@ def acceptVolunteerRequest():
     return jsonify({ "message": "Erro ao aceitar solicitação de voluntariado" }), 500
   return jsonify({ "message": "Solicitação de voluntariado aceita com sucesso" }), 200
 
-@controller.put('/cancel-volunteer-request')
+@controller.post('/cancel-volunteer-request')
 def cancelVolunteerRequest():
   data = request.get_json()
   if not data or 'shelter_id' not in data or 'volunteer_id' not in data:

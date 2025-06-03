@@ -5,7 +5,7 @@
             "name": "Lar dos Fofoquitos",
             "address": "Recife, PE"
         },
-        "name": "click",
+        "name": "clickdoid",
         "age": "6",
         "sex": "m",
         "adopted": true,
@@ -26,19 +26,5 @@
         "description": "deded",
         "adoption_requests": [],
         "id": "951116ab-8386-4789-84d6-658dd2acb434"
-    },
-    {
-        "shelter": {
-            "id": "4fcdbc6c-41f5-4d4a-aa97-59384c2ba930",
-            "name": "Lar dos Fofoquitos",
-            "address": "Recife, PE"
-        },
-        "name": "teste",
-        "age": "7",
-        "sex": "m",
-        "adopted": false,
-        "description": "fefef",
-        "adoption_requests": [],
-        "id": "4a2cefb8-ab9c-4a90-8264-97ccb99f0fc9"
     }
 ]

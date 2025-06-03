@@ -1,0 +1,13 @@
+[
+    {
+        "name": "lucas",
+        "email": "lucas@gmail.com",
+        "password": "voluntario123",
+        "role": "volunteer",
+        "confirmPassword": "voluntario123",
+        "availability": "diurno",
+        "skills": "cuidado animal",
+        "applied_shelters": [],
+        "id": "4f78ad1b-3044-4db8-ad7d-e3ba140e0770"
+    }
+]

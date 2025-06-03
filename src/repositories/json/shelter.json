@@ -6,7 +6,11 @@
         "role": "shelter",
         "confirmPassword": "123",
         "address": "Recife, PE",
-        "accepting_volunteers": false,
+        "accepting_volunteers": true,
+        "volunteer_requests": [],
+        "active_volunteers": [
+            "4f78ad1b-3044-4db8-ad7d-e3ba140e0770"
+        ],
         "id": "4fcdbc6c-41f5-4d4a-aa97-59384c2ba930"
     }
 ]

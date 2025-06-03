@@ -11,6 +11,7 @@ def create(new_shelter):
     new_shelter["active_volunteers"] = []
     new_shelter["volunteer_requests"] = []
     new_shelter["accepting_volunteers"] = False
+    new_shelter["active_volunteers"] = []
 
     if not os.path.exists(SHELTER_PATH):
         with open(SHELTER_PATH, 'w') as file:

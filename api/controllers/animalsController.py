@@ -27,7 +27,7 @@ def getAnimalByShelter(id):
   animals = animalsRepository.readAllByShelterId(id)
   return animals
 
-@controller.put('/')
+@controller.post('/update')
 def updateAnimal():
   updated_animal = request.get_json()
   if not updated_animal:

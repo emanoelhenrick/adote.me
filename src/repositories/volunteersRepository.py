@@ -8,6 +8,7 @@ VOLUNTEER_PATH = getJsonPath('volunteers')
 def create(volunteer):
     new_uuid = uuid4().__str__()
     volunteer['id'] = new_uuid
+    volunteer['applied_shelters'] = []
 
     if not os.path.exists(VOLUNTEER_PATH):
         with open(VOLUNTEER_PATH, 'w') as file:
