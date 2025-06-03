@@ -57,7 +57,18 @@ def readById(volunteer_id):
     
     return None
 
+def readByEmail(email):
+    if not os.path.exists(VOLUNTEER_PATH):
+        return None
+    
+    with open(VOLUNTEER_PATH, 'r') as file:
+        volunteer_json = json.load(file)
 
+        for volunteer in volunteer_json:
+            if volunteer["email"] == email:
+                return volunteer
+    
+    return None
 
 def readAll():
    if not os.path.exists(VOLUNTEER_PATH):

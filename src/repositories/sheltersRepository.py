@@ -55,6 +55,18 @@ def readById(shelter_id):
             
     return None
 
+def readByEmail(email):
+    if not os.path.exists(SHELTER_PATH):
+        return None
+    
+    with open(SHELTER_PATH, 'r') as file:
+        shelter_json = json.load(file)
+
+        for shelter in shelter_json:
+            if shelter["email"] == email:
+                return shelter
+            
+    return None
 
 def readAll():
     if not os.path.exists(SHELTER_PATH):

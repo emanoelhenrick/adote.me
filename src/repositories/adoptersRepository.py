@@ -65,7 +65,16 @@ def readById(adopter_id):
                 return adopter
     return None
 
+def readByEmail(email):
+    if not os.path.exists(ADOPTERS_PATH):
+        return None
 
+    with open(ADOPTERS_PATH, 'r') as file:
+        adopter_json = json.load(file)
+        for adopter in adopter_json:
+            if adopter['email'] == email:
+                return adopter
+    return None
 
 def delete(adopter_id):
     if not os.path.exists(ADOPTERS_PATH):
