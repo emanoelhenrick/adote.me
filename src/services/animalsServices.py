@@ -15,13 +15,13 @@ def cancelAdoption(adopter_id, animal_id):
     return False
 
 def fetchAllAvailableAnimals():
-    animal = animalsRepository.readAll()
+    animals = animalsRepository.readAll()
     available = []
 
-    if animal is None:
+    if animals is None:
         return []
 
-    for animal in animalsRepository:
+    for animal in animals:
         if not animal['adopted']:
             available.append(animal)
 
