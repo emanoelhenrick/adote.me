@@ -67,7 +67,7 @@ def readAllByShelterId(shelter_id):
         animals = []
         animal_json = json.load(file)
         for animal in animal_json:
-            if animal['shelter_id'] == shelter_id:
+            if animal['shelter']['id'] == shelter_id:
                 animals.append(animal)
         if len(animals) > 0:
             return animals

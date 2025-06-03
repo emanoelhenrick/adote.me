@@ -31,6 +31,8 @@ def authenticateUser(email, password):
     if user and user.get('password') == password:
         return {
             'id': user.get('id'),
+            'name': user.get('name'),
+            'address': user.get('address'),
             'role': user.get('role')
         }
     else:
@@ -57,6 +59,8 @@ def registerUser(user_data):
     if user:
         return {
           'id': user.get('id'),
+          'name': user.get('name'),
+          'address': user.get('address'),
           'role': user.get('role')
         }
     else:

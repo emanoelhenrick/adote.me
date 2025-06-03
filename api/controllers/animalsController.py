@@ -22,6 +22,11 @@ def getAnimalById(id):
   animal = animalsRepository.readById(id)
   return animal
 
+@controller.get('/shelter/<id>')
+def getAnimalByShelter(id):
+  animals = animalsRepository.readAllByShelterId(id)
+  return animals
+
 @controller.put('/')
 def updateAnimal():
   updated_animal = request.get_json()

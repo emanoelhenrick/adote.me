@@ -1,9 +1,11 @@
 [
     {
-        "email": "manel@gmail.com",
-        "password": "123",
+        "name": "Lar dos Fofoquitos",
+        "email": "fofoquitos@gmail.com",
+        "password": "12345678",
         "role": "shelter",
-        "name": "Emanoel Henrick",
-        "id": "98a327bb-66d0-4af6-b8a4-d87255331a3e"
+        "confirmPassword": "123",
+        "address": "Recife, PE",
+        "id": "4fcdbc6c-41f5-4d4a-aa97-59384c2ba930"
     }
 ]

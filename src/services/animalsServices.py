@@ -22,7 +22,7 @@ def fetchAllAvailableAnimals():
         return []
 
     for animal in animals:
-        if not animal['adopted']:
+        if not animal["adopted"]:
             available.append(animal)
 
     return available
