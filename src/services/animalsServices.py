@@ -10,12 +10,16 @@ def requestAdoption(adopter_id, animal_id):
         animal['adoption_requests'].append(adopter_id)
         animalsRepository.update(animal)
         return True
-
+    
     else:
         return False 
 
 def cancelAdoption(adopter_id, animal_id):
     animal = animalsRepository.readById(animal_id)
+
+    if animal is None:
+        return False
+    
     if adopter_id in animal['adoption_requests']:
         animal['adoption_requests'].remove(adopter_id)
         animalsRepository.update(animal)
